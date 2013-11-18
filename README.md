@@ -22,7 +22,7 @@ Screenshots
 
 * **Pokemon Ruby:**
 
-    ![Pokemon Ruby](http://i.imgur.com/grgr5IH.png "Pokemon Ruby")
+    ![Pokemon Ruby](http://i.imgur.com/OO9XCRk.png "Pokemon Ruby")
     
 * **Mario & Luigi Superstar Saga:**
     
