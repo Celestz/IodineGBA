@@ -44,6 +44,7 @@ function GameBoyAdvanceEmulator() {
     this.saveExportHandler = null;            //Save export handler attached by GUI.
     this.saveImportHandler = null;            //Save import handler attached by GUI.
     this.graphicsFrameCallback = null;        //Graphics blitter handler attached by GUI.
+    this.metricStart = null;                  //Date object reference.
     //Calculate some multipliers against the core emulator timer:
     this.calculateTimings();
 }
@@ -190,8 +191,17 @@ GameBoyAdvanceEmulator.prototype.calculateTimings = function () {
     this.CPUCyclesTotal = this.CPUCyclesPerIteration = (this.clocksPerSecond / 1000 * this.timerIntervalRate) | 0;
 }
 GameBoyAdvanceEmulator.prototype.getSpeedPercentage = function () {
-    var metricEnd = new Date();
-    return (((this.timerIntervalRate * this.clockCyclesSinceStart / (metricEnd.getTime() - this.metricStart.getTime())) / this.CPUCyclesPerIteration) * 100) + "%";
+    if (this.metricStart && !this.paused) {
+        var metricEnd = new Date();
+        var timeDiff = Math.max(metricEnd.getTime() - this.metricStart.getTime(), 1);
+        var result = ((this.timerIntervalRate * this.clockCyclesSinceStart / timeDiff) / this.CPUCyclesPerIteration) * 100;
+        this.resetMetrics();
+        return result.toFixed(2) + "%";
+    }
+    else {
+        this.resetMetrics();
+        return "Paused";
+    }
 }
 GameBoyAdvanceEmulator.prototype.initializeCore = function () {
     //Setup a new instance of the i/o core:

@@ -48,62 +48,59 @@ function registerGUIEvents() {
     addEvent("change", document.getElementById("rom_load"), fileLoadROM);
     addEvent("change", document.getElementById("bios_load"), fileLoadBIOS);
     addEvent("click", document.getElementById("play"), function (event) {
-        Iodine.play();
-        this.style.display = "none";
-        document.getElementById("pause").style.display = "inline";
-        event.preventDefault();
-    });
+             Iodine.play();
+             this.style.display = "none";
+             document.getElementById("pause").style.display = "inline";
+             event.preventDefault();
+             });
     addEvent("click", document.getElementById("pause"), function (event) {
-        Iodine.pause();
-        this.style.display = "none";
-        document.getElementById("play").style.display = "inline";
-        event.preventDefault();
-    });
+             Iodine.pause();
+             this.style.display = "none";
+             document.getElementById("play").style.display = "inline";
+             event.preventDefault();
+             });
     addEvent("click", document.getElementById("restart"), function (event) {
-        Iodine.restart();
-        event.preventDefault();
-    });
+             Iodine.restart();
+             event.preventDefault();
+             });
     document.getElementById("sound").checked = false;
     addEvent("click", document.getElementById("sound"), function () {
-        if (this.checked) {
-            Iodine.enableAudio();
-        }
-        else {
-            Iodine.disableAudio();
-        }
-    });
+             if (this.checked) {
+             Iodine.enableAudio();
+             }
+             else {
+             Iodine.disableAudio();
+             }
+             });
     document.getElementById("skip_boot").checked = false;
     addEvent("click", document.getElementById("skip_boot"), function () {
              Iodine.toggleSkipBootROM(this.checked);
-    });
+             });
     document.getElementById("lle_jit").checked = false;
     addEvent("click", document.getElementById("lle_jit"), function () {
              Iodine.toggleDynarec(this.checked);
-    });
+             });
     document.getElementById("lineskip").checked = false;
     addEvent("click", document.getElementById("lineskip"), function () {
              Iodine.toggleLineSkip(this.checked);
-    });
+             });
     document.getElementById("toggleSlowDownBusHack").checked = false;
     addEvent("click", document.getElementById("toggleSlowDownBusHack"), function () {
              Iodine.toggleSlowDownBusHack(this.checked);
-    });
+             });
     document.getElementById("toggleSmoothScaling").checked = true;
     addEvent("click", document.getElementById("toggleSmoothScaling"), function () {
              if (Blitter) {
-                Blitter.setSmoothScaling(this.checked);
+             Blitter.setSmoothScaling(this.checked);
              }
-    });
+             });
     addEvent("unload", document, ExportSave);
     setInterval(
-            function () {
-                if (!Iodine.paused) {
-                    var speed = document.getElementById("speed");
-                    speed.textContent = "Speed: " + Iodine.getSpeedPercentage();
+                function () {
+                var speed = document.getElementById("speed");
+                speed.textContent = "Speed: " + Iodine.getSpeedPercentage();
                 }
-                Iodine.resetMetrics();
-            }
-    ,500);
+                ,500);
 }
 function resetPlayButton() {
     document.getElementById("pause").style.display = "none";
@@ -130,7 +127,7 @@ function clearTempString() {
 }
 //Some wrappers and extensions for non-DOM3 browsers:
 function addEvent(sEvent, oElement, fListener) {
-    try {    
+    try {
         oElement.addEventListener(sEvent, fListener, false);
     }
     catch (error) {
@@ -138,7 +135,7 @@ function addEvent(sEvent, oElement, fListener) {
     }
 }
 function removeEvent(sEvent, oElement, fListener) {
-    try {    
+    try {
         oElement.removeEventListener(sEvent, fListener, false);
     }
     catch (error) {
