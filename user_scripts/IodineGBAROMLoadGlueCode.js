@@ -76,10 +76,7 @@ function downloadFile(fileName, registrationHandler) {
 }
 function processDownload(parentObj, attachHandler) {
     try {
-        var data = parentObj.response;
-        if (data) {
-            attachHandler(new Uint8Array(data));
-        }
+        attachHandler(new Uint8Array(parentObj.response));
     }
     catch (error) {
         var data = parentObj.responseText;
